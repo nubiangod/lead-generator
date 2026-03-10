@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>My Cybersecurity Career Roadmap – 3 Month Journey</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #00ff88;
+    --orange: #ff6b35;
+    --purple: #a78bfa;
+    --bg: #050810;
+    --surface: rgba(255,255,255,0.03);
+    --border: rgba(255,255,255,0.08);
+    --text: #e2e8f0;
+    --muted: #64748b;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Courier New', monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* scanlines */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,136,0.012) 2px, rgba(0,255,136,0.012) 4px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: relative; z-index: 1;
+    border-bottom: 1px solid rgba(0,255,136,0.2);
+    padding: 28px 32px 20px;
+    background: rgba(0,255,136,0.03);
+  }
+  .sys-label {
+    font-size: 10px; color: var(--green);
+    letter-spacing: 4px; margin-bottom: 8px;
+  }
+  header h1 {
+    font-size: clamp(20px, 4vw, 36px);
+    font-weight: 900; color: #fff; line-height: 1.1;
+    letter-spacing: -0.5px;
+  }
+  header h1 span { color: var(--green); text-shadow: 0 0 24px rgba(0,255,136,0.45); }
+  .sub { font-size: 13px; color: var(--muted); margin-top: 6px; }
+
+  /* progress bar */
+  .progress-row {
+    display: flex; align-items: center; gap: 12px;
+    margin-top: 18px;
+  }
+  .progress-label { font-size: 10px; color: var(--green); letter-spacing: 2px; white-space: nowrap; }
+  .progress-track {
+    flex: 1; height: 6px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 3px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, #00ff88, #00d4ff);
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(0,255,136,0.5);
+    transition: width 0.5s ease;
+  }
+  .progress-pct { font-size: 12px; color: var(--green); font-weight: bold; min-width: 38px; }
+
+  /* ── LAYOUT ── */
+  .layout {
+    position: relative; z-index: 1;
+    display: flex; gap: 24px;
+    padding: 24px 32px;
+    flex-wrap: wrap;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar { display: flex; flex-direction: column; gap: 10px; min-width: 180px; max-width: 220px; flex-shrink: 0; }
+
+  .phase-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 14px 16px;
+    cursor: pointer; text-align: left;
+    transition: all 0.2s; width: 100%;
+  }
+  .phase-btn.active-green  { background: rgba(0,255,136,0.12);  border-color: var(--green);  box-shadow: 0 0 18px rgba(0,255,136,0.2); }
+  .phase-btn.active-orange { background: rgba(255,107,53,0.12); border-color: var(--orange); box-shadow: 0 0 18px rgba(255,107,53,0.2); }
+  .phase-btn.active-purple { background: rgba(167,139,250,0.12);border-color: var(--purple); box-shadow: 0 0 18px rgba(167,139,250,0.2); }
+
+  .phase-btn .wk { font-size: 10px; letter-spacing: 2px; margin-bottom: 2px; }
+  .phase-btn .ph { font-size: 14px; font-weight: bold; }
+  .phase-btn .ps { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  .roles-box {
+    margin-top: 8px;
+    background: rgba(167,139,250,0.05);
+    border: 1px solid rgba(167,139,250,0.2);
+    border-radius: 8px; padding: 14px;
+  }
+  .roles-box .rl { font-size: 10px; color: var(--purple); letter-spacing: 2px; margin-bottom: 10px; }
+  .role-item { margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .role-item:last-child { margin-bottom: 0; border: none; }
+  .role-title { font-size: 12px; font-weight: bold; color: var(--text); }
+  .role-sal { font-size: 10px; color: var(--green); margin-top: 2px; }
+  .role-meta { font-size: 10px; color: var(--muted); }
+
+  /* ── MAIN ── */
+  .main { flex: 1; min-width: 280px; }
+
+  .phase-header {
+    border-radius: 12px; padding: 20px 24px;
+    margin-bottom: 20px;
+    display: flex; justify-content: space-between; align-items: flex-start;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .phase-header .wk-line { font-size: 11px; letter-spacing: 3px; margin-bottom: 4px; }
+  .phase-header h2 { font-size: clamp(16px,2.5vw,22px); font-weight: 900; color: #fff; }
+  .cert-badge {
+    border-radius: 8px; padding: 8px 14px;
+    font-size: 12px; display: flex; align-items: center; gap: 6px;
+    white-space: nowrap;
+  }
+
+  /* track tabs */
+  .tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  .tab-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px; padding: 8px 14px;
+    cursor: pointer; color: var(--muted);
+    font-size: 12px; font-weight: bold;
+    font-family: 'Courier New', monospace;
+    transition: all 0.2s;
+  }
+  .tab-btn.tab-active { color: #000; }
+
+  /* cards grid */
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media(max-width:600px){ .cards { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px;
+  }
+  .card-label { font-size: 10px; color: var(--muted); letter-spacing: 3px; margin-bottom: 14px; }
+
+  /* skills */
+  .skill-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+    cursor: pointer;
+  }
+  .skill-item:last-child { border: none; }
+  .checkbox {
+    width: 16px; height: 16px; flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 3px; margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; color: #000;
+    transition: all 0.2s; user-select: none;
+  }
+  .skill-text { font-size: 13px; color: #cbd5e1; line-height: 1.4; transition: all 0.2s; }
+  .skill-item.done .skill-text { color: var(--muted); text-decoration: line-through; }
+
+  /* resources */
+  .res-link {
+    display: block; padding: 10px; margin-bottom: 8px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 6px; text-decoration: none;
+    transition: background 0.2s;
+    border-left-width: 3px; border-left-style: solid;
+  }
+  .res-link:hover { background: rgba(255,255,255,0.07); }
+  .res-link .res-name { font-size: 12px; color: var(--text); font-weight: bold; }
+  .res-link .res-arrow { font-size: 10px; margin-top: 3px; }
+
+  /* milestone */
+  .milestone {
+    margin-top: 16px; border-radius: 10px;
+    padding: 16px 20px;
+    display: flex; align-items: center; gap: 12px;
+    border-style: dashed; border-width: 1px;
+  }
+  .milestone .ms-emoji { font-size: 24px; }
+  .milestone .ms-label { font-size: 10px; letter-spacing: 2px; margin-bottom: 4px; }
+  .milestone .ms-text { font-size: 13px; color: var(--text); }
+
+  /* footer */
+  footer {
+    position: relative; z-index: 1;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 16px 32px; text-align: center;
+    font-size: 10px; color: #334155; letter-spacing: 2px;
+  }
+
+  /* GitHub banner */
+  .gh-banner {
+    position: relative; z-index: 1;
+    margin: 0 32px 0; padding: 14px 20px;
+    background: rgba(255,107,53,0.07);
+    border: 1px solid rgba(255,107,53,0.25);
+    border-radius: 8px;
+    display: flex; align-items: center; gap: 14px;
+    flex-wrap: wrap;
+  }
+  .gh-banner .gh-icon { font-size: 22px; }
+  .gh-banner .gh-text { font-size: 12px; color: #cbd5e1; flex: 1; }
+  .gh-banner .gh-text strong { color: var(--orange); }
+  .gh-stars { font-size: 11px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="sys-label">▶ SYSTEM INITIALIZED // CYBERSECURITY CAREER MATRIX v1.0</div>
+  <h1>YOUR 3-MONTH MISSION TO<br><span>REMOTE CYBERSECURITY JOB</span></h1>
+  <div class="sub">Beginner → Employed &nbsp;//&nbsp; Microsoft Skills + Python → Security Professional</div>
+  <div class="progress-row">
+    <div class="progress-label">SKILL PROGRESS</div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-pct" id="progressPct">0%</div>
+  </div>
+</header>
+
+<!-- GitHub Banner -->
+<div style="padding:18px 32px 0; position:relative; z-index:1;">
+  <div class="gh-banner">
+    <div class="gh-icon">🐙</div>
+    <div class="gh-text">
+      <strong>This is your public journey file.</strong> Save this HTML file, upload it to GitHub,
+      enable GitHub Pages — and the world can follow your progress. Check off skills as you learn them!
+    </div>
+    <div class="gh-stars">⭐ Share your repo link with the cyber community</div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <button class="phase-btn active-green" onclick="setPhase(0)" id="btn0">
+      <div class="wk" style="color:var(--green)">Weeks 1–4</div>
+      <div class="ph" style="color:var(--green)">MONTH 1</div>
+      <div class="ps">Foundation & Core Concepts</div>
+    </button>
+    <button class="phase-btn" onclick="setPhase(1)" id="btn1">
+      <div class="wk" style="color:var(--orange)">Weeks 5–8</div>
+      <div class="ph" style="color:#94a3b8">MONTH 2</div>
+      <div class="ps">Hands-On Security Skills</div>
+    </button>
+    <button class="phase-btn" onclick="setPhase(2)" id="btn2">
+      <div class="wk" style="color:var(--purple)">Weeks 9–12</div>
+      <div class="ph" style="color:#94a3b8">MONTH 3</div>
+      <div class="ps">Job Readiness & Applications</div>
+    </button>
+
+    <div class="roles-box">
+      <div class="rl">TARGET ROLES</div>
+      <div class="role-item">
+        <div class="role-title">SOC Analyst L1</div>
+        <div class="role-sal">$45k–$70k/yr</div>
+        <div class="role-meta">Remote: Very High · ★★☆☆☆</div>
+      </div>
+      <div class="role-item">
+        <div class="role-title">Security Analyst</div>
+        <div class="role-sal">$55k–$85k/yr</div>
+        <div class="role-meta">Remote: High · ★★★☆☆</div>
+      </div>
+      <div class="role-item">
+        <div class="role-title">Jr. Penetration Tester</div>
+        <div class="role-sal">$60k–$90k/yr</div>
+        <div class="role-meta">Remote: Medium · ★★★★☆</div>
+      </div>
+      <div class="role-item">
+        <div class="role-title">Cloud Security Analyst</div>
+        <div class="role-sal">$65k–$95k/yr</div>
+        <div class="role-meta">Remote: Very High · ★★★☆☆</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main" id="mainContent"></main>
+</div>
+
+<footer>
+  CLICK SKILLS TO TRACK YOUR PROGRESS &nbsp;//&nbsp; CLICK RESOURCES TO OPEN THEM &nbsp;//&nbsp; STAY CONSISTENT — 2–3 HRS/DAY MINIMUM
+</footer>
+
+<script>
+const PHASES = [
+  {
+    title: "Foundation & Core Concepts",
+    weeks: "Weeks 1–4 // Build your technical base",
+    color: "#00ff88", rgb: "0,255,136",
+    certTarget: "🎯 Microsoft SC-900",
+    milestone: "Complete SC-900 Certification + finish TryHackMe Pre-Security path",
+    tracks: [
+      {
+        name: "🌐 Networking", fullName: "Networking Fundamentals",
+        skills: ["OSI & TCP/IP Model","IP Addressing & Subnetting","DNS, DHCP, HTTP/S","Firewalls & VPNs"],
+        resources: [
+          {name:"Professor Messer CompTIA Network+", url:"https://www.professormesser.com/network-plus/n10-008/n10-008-video/n10-008-training-course/"},
+          {name:"NetworkChuck YouTube Channel", url:"https://www.youtube.com/@NetworkChuck"},
+          {name:"Cisco Packet Tracer (free)", url:"https://www.netacad.com/courses/packet-tracer"},
+        ]
+      },
+      {
+        name: "🐧 Linux", fullName: "Linux & Command Line",
+        skills: ["Linux file system & navigation","Bash scripting basics","User & permission management","Log analysis with grep/awk"],
+        resources: [
+          {name:"OverTheWire: Bandit (gamified Linux)", url:"https://overthewire.org/wargames/bandit/"},
+          {name:"Linux Journey (free interactive)", url:"https://linuxjourney.com/"},
+          {name:"TryHackMe: Pre-Security Path", url:"https://tryhackme.com/path/outline/presecurity"},
+        ]
+      },
+      {
+        name: "🪟 Microsoft", fullName: "Leverage Your Microsoft Knowledge",
+        skills: ["Active Directory basics","Azure Security fundamentals","Windows Event Logs","PowerShell for security"],
+        resources: [
+          {name:"Microsoft SC-900 (Security Fundamentals)", url:"https://learn.microsoft.com/en-us/credentials/certifications/security-compliance-and-identity-fundamentals/"},
+          {name:"Azure Security Center Docs", url:"https://learn.microsoft.com/en-us/azure/defender-for-cloud/"},
+        ]
+      },
+      {
+        name: "🐍 Python", fullName: "Python for Security",
+        skills: ["Port scanners with socket library","Automate log parsing","Hash & encrypt files","Simple packet sniffer with Scapy"],
+        resources: [
+          {name:"Automate the Boring Stuff (free)", url:"https://automatetheboringstuff.com/"},
+          {name:"Black Hat Python (book)", url:"https://nostarch.com/black-hat-python2E"},
+        ]
+      },
+    ]
+  },
+  {
+    title: "Hands-On Security Skills",
+    weeks: "Weeks 5–8 // Get your hands dirty",
+    color: "#ff6b35", rgb: "255,107,53",
+    certTarget: "📚 Security+ Study Begins",
+    milestone: "Complete 5 TryHackMe rooms + 2 HackTheBox machines + build home lab",
+    tracks: [
+      {
+        name: "🔓 Ethical Hacking", fullName: "Ethical Hacking Basics",
+        skills: ["Reconnaissance & OSINT","Vulnerability scanning (Nmap, Nessus)","Web app attacks (OWASP Top 10)","Basic exploitation (Metasploit)"],
+        resources: [
+          {name:"TryHackMe: Jr Penetration Tester Path", url:"https://tryhackme.com/path/outline/jrpenetrationtester"},
+          {name:"Hack The Box Starting Point", url:"https://app.hackthebox.com/starting-point"},
+          {name:"OWASP WebGoat (practice target)", url:"https://owasp.org/www-project-webgoat/"},
+        ]
+      },
+      {
+        name: "🛡️ Blue Team", fullName: "SOC & Blue Team Skills",
+        skills: ["SIEM basics (Splunk / Microsoft Sentinel)","Incident response workflow","Threat intelligence feeds","Log correlation & alerting"],
+        resources: [
+          {name:"Splunk Free Training (Fundamentals 1)", url:"https://www.splunk.com/en_us/training/free-courses/splunk-fundamentals-1.html"},
+          {name:"LetsDefend.io (blue team labs)", url:"https://letsdefend.io/"},
+          {name:"Blue Team Labs Online", url:"https://blueteamlabs.online/"},
+        ]
+      },
+      {
+        name: "☁️ Cloud Security", fullName: "Cloud Security",
+        skills: ["Azure Security Center","IAM policies & least privilege","Cloud misconfigurations","Microsoft Defender for Cloud"],
+        resources: [
+          {name:"Microsoft AZ-500 Study Guide", url:"https://learn.microsoft.com/en-us/credentials/certifications/azure-security-engineer/"},
+          {name:"CloudGoat (vulnerable AWS lab)", url:"https://github.com/RhinoSecurityLabs/cloudgoat"},
+        ]
+      },
+      {
+        name: "🔨 Build Projects", fullName: "Build Your Portfolio Projects",
+        skills: ["Home lab with VirtualBox/VMware","Set up Wazuh SIEM (free)","Python port scanner project","CTF competitions (PicoCTF)"],
+        resources: [
+          {name:"Wazuh (free open-source SIEM)", url:"https://wazuh.com/"},
+          {name:"PicoCTF competitions", url:"https://picoctf.org/"},
+          {name:"VulnHub (practice VMs)", url:"https://www.vulnhub.com/"},
+        ]
+      },
+    ]
+  },
+  {
+    title: "Job Readiness & Applications",
+    weeks: "Weeks 9–12 // Land that remote role",
+    color: "#a78bfa", rgb: "167,139,250",
+    certTarget: "🏆 CompTIA Security+ Target",
+    milestone: "Pass Security+ or Google Cert + 3 job applications per day + active LinkedIn",
+    tracks: [
+      {
+        name: "🏆 Certs", fullName: "Certifications to Earn",
+        skills: ["CompTIA Security+ (most employer-recognized)","Microsoft SC-200 (SOC Analyst)","Google Cybersecurity Certificate","eJPT (entry-level pentest cert)"],
+        resources: [
+          {name:"CompTIA Security+ SY0-701", url:"https://www.comptia.org/certifications/security"},
+          {name:"Google Cybersecurity Certificate (Coursera)", url:"https://grow.google/certificates/cybersecurity/"},
+          {name:"eLearnSecurity eJPT", url:"https://ine.com/learning/certifications/internal/elearnsecurity-junior-penetration-tester"},
+        ]
+      },
+      {
+        name: "📁 Portfolio", fullName: "Portfolio Building",
+        skills: ["GitHub with security projects","Write walkthroughs on Medium/Hashnode","Document your home lab setup","CTF write-ups as proof of skill"],
+        resources: [
+          {name:"GitHub (create security portfolio)", url:"https://github.com/"},
+          {name:"Medium (write CTF write-ups)", url:"https://medium.com/"},
+          {name:"Hashnode (developer blogging)", url:"https://hashnode.com/"},
+        ]
+      },
+      {
+        name: "🎯 Job Hunt", fullName: "Job Hunting Strategy",
+        skills: ["Optimize LinkedIn for cyber roles","Target: SOC Analyst L1, Security Analyst","Remote-first job boards","Tailor resume to ATS keywords"],
+        resources: [
+          {name:"LinkedIn Jobs (cybersecurity remote)", url:"https://www.linkedin.com/jobs/cybersecurity-jobs/"},
+          {name:"CyberSecJobs.com", url:"https://www.cybersecjobs.com/"},
+          {name:"We Work Remotely", url:"https://weworkremotely.com/"},
+        ]
+      },
+      {
+        name: "💬 Interviews", fullName: "Interview Preparation",
+        skills: ["Common SOC interview questions","Practice: 'Walk me through an incident'","Explain your home lab confidently","Know your MITRE ATT&CK basics"],
+        resources: [
+          {name:"MITRE ATT&CK Framework", url:"https://attack.mitre.org/"},
+          {name:"Daniel Miessler's Cybersecurity Study Guide", url:"https://danielmiessler.com/study/security-engineer-checklist/"},
+          {name:"Reddit r/cybersecurity career advice", url:"https://www.reddit.com/r/cybersecurity/"},
+        ]
+      },
+    ]
+  }
+];
+
+// State
+let currentPhase = 0;
+let currentTrack = 0;
+let checkedSkills = {};
+
+// Load saved progress from localStorage
+try {
+  const saved = localStorage.getItem('cyber_roadmap_progress');
+  if (saved) checkedSkills = JSON.parse(saved);
+} catch(e) {}
+
+function saveProgress() {
+  try { localStorage.setItem('cyber_roadmap_progress', JSON.stringify(checkedSkills)); } catch(e) {}
+}
+
+function getTotalSkills() {
+  return PHASES.flatMap(p => p.tracks.flatMap(t => t.skills)).length;
+}
+function getCheckedCount() {
+  return Object.values(checkedSkills).filter(Boolean).length;
+}
+function updateProgress() {
+  const pct = Math.round((getCheckedCount() / getTotalSkills()) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressPct').textContent = pct + '%';
+}
+
+function setPhase(idx) {
+  currentPhase = idx;
+  currentTrack = 0;
+
+  // Update sidebar buttons
+  const colors = ['active-green','active-orange','active-purple'];
+  const phLabels = [document.getElementById('btn0').querySelector('.ph'),
+                    document.getElementById('btn1').querySelector('.ph'),
+                    document.getElementById('btn2').querySelector('.ph')];
+  const phColors = ['var(--green)', 'var(--orange)', 'var(--purple)'];
+
+  [0,1,2].forEach(i => {
+    const btn = document.getElementById('btn' + i);
+    btn.className = 'phase-btn';
+    phLabels[i].style.color = '#94a3b8';
+    if (i === idx) {
+      btn.classList.add(colors[i]);
+      phLabels[i].style.color = phColors[i];
+    }
+  });
+
+  renderMain();
+}
+
+function setTrack(idx) {
+  currentTrack = idx;
+  renderMain();
+}
+
+function toggleSkill(phaseIdx, trackIdx, skillIdx) {
+  const key = `${phaseIdx}-${trackIdx}-${skillIdx}`;
+  checkedSkills[key] = !checkedSkills[key];
+  saveProgress();
+  updateProgress();
+
+  // Update just this skill item
+  const el = document.getElementById('skill-' + key);
+  const cb = document.getElementById('cb-' + key);
+  const txt = document.getElementById('txt-' + key);
+  const phase = PHASES[phaseIdx];
+  if (checkedSkills[key]) {
+    el.classList.add('done');
+    cb.style.background = phase.color;
+    cb.style.borderColor = phase.color;
+    cb.textContent = '✓';
+  } else {
+    el.classList.remove('done');
+    cb.style.background = 'transparent';
+    cb.style.borderColor = 'rgba(255,255,255,0.2)';
+    cb.textContent = '';
+  }
+}
+
+function renderMain() {
+  const phase = PHASES[currentPhase];
+  const track = phase.tracks[currentTrack];
+  const c = phase.color;
+  const rgb = phase.rgb;
+
+  let html = `
+    <!-- Phase header -->
+    <div class="phase-header" style="background:linear-gradient(135deg,rgba(${rgb},0.1),transparent);border:1px solid rgba(${rgb},0.35)">
+      <div>
+        <div class="wk-line" style="color:${c}">${phase.weeks}</div>
+        <h2>${phase.title}</h2>
+      </div>
+      <div class="cert-badge" style="background:rgba(${rgb},0.15);border:1px solid ${c};color:${c}">
+        ${phase.certTarget}
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+  `;
+
+  phase.tracks.forEach((t, i) => {
+    const active = i === currentTrack;
+    html += `
+      <button class="tab-btn ${active ? 'tab-active' : ''}"
+        style="${active ? `background:${c};border-color:${c};` : ''}"
+        onclick="setTrack(${i})">
+        ${t.name}
+      </button>
+    `;
+  });
+
+  html += `</div><div class="cards">`;
+
+  // Skills card
+  html += `
+    <div class="card">
+      <div class="card-label">SKILLS TO ACQUIRE</div>
+  `;
+  track.skills.forEach((skill, si) => {
+    const key = `${currentPhase}-${currentTrack}-${si}`;
+    const done = !!checkedSkills[key];
+    html += `
+      <div class="skill-item ${done ? 'done' : ''}" id="skill-${key}" onclick="toggleSkill(${currentPhase},${currentTrack},${si})">
+        <div class="checkbox" id="cb-${key}"
+          style="border-color:${done ? c : 'rgba(255,255,255,0.2)'};background:${done ? c : 'transparent'}">
+          ${done ? '✓' : ''}
+        </div>
+        <span class="skill-text" id="txt-${key}">${skill}</span>
+      </div>
+    `;
+  });
+  html += `</div>`;
+
+  // Resources card
+  html += `
+    <div class="card">
+      <div class="card-label">FREE RESOURCES</div>
+  `;
+  track.resources.forEach(res => {
+    html += `
+      <a class="res-link" href="${res.url}" target="_blank" rel="noopener noreferrer"
+         style="border-left-color:${c}">
+        <div class="res-name">${res.name}</div>
+        <div class="res-arrow" style="color:${c}">→ Open resource</div>
+      </a>
+    `;
+  });
+  html += `</div></div>`;
+
+  // Milestone
+  html += `
+    <div class="milestone" style="background:rgba(${rgb},0.05);border-color:rgba(${rgb},0.4)">
+      <div class="ms-emoji">🏁</div>
+      <div>
+        <div class="ms-label" style="color:${c}">MONTH ${currentPhase + 1} MILESTONE</div>
+        <div class="ms-text">${phase.milestone}</div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('mainContent').innerHTML = html;
+}
+
+// Init
+renderMain();
+updateProgress();
+</script>
+</body>
+</html>
